@@ -11,8 +11,11 @@ import java.util.Optional;
 @Service
 public class ProjectServiceImpl implements IProjectService {
 
-    @Autowired
     private IProjectRepository projectRepository;
+
+    public ProjectServiceImpl(IProjectRepository projectRepository) {
+        this.projectRepository = projectRepository;
+    }
 
     @Override
     public Optional<Project> findById(Long id) {
@@ -23,4 +26,5 @@ public class ProjectServiceImpl implements IProjectService {
     public Project save(Project project) {
         return projectRepository.save(project);
     }
+
 }

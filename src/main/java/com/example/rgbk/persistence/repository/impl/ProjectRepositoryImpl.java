@@ -2,6 +2,7 @@ package com.example.rgbk.persistence.repository.impl;
 
 import com.example.rgbk.persistence.model.Project;
 import com.example.rgbk.persistence.repository.IProjectRepository;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -12,6 +13,10 @@ import java.util.Optional;
 public class ProjectRepositoryImpl implements IProjectRepository {
 
     List<Project> projects = new ArrayList<>();
+
+    public ProjectRepositoryImpl() {
+        super();
+    }
 
     @Override
     public Optional<Project> findById(Long id) {
