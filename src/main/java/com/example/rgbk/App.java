@@ -10,10 +10,12 @@ public class App {
 
 	public static void main(String[] args) {
 
-		//SpringApplication.run(App.class, args);
+		SpringApplication.run(App.class, args);
 
-		ConfigurableApplicationContext context = SpringApplication.run(new Class[] { App.class, AppConfig.class }, args);
-		context.close();
+		// Uncomment the below to test the destroy hook in bean lifecycle
+		// But you also have to comment the above code
+//		ConfigurableApplicationContext context = SpringApplication.run(new Class[] { App.class, AppConfig.class }, args);
+//		context.close();
 
 	}
 

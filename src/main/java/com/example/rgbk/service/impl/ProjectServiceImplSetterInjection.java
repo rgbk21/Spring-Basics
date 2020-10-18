@@ -3,18 +3,20 @@ package com.example.rgbk.service.impl;
 import com.example.rgbk.persistence.model.Project;
 import com.example.rgbk.persistence.repository.IProjectRepository;
 import com.example.rgbk.service.IProjectService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
-public class ProjectServiceImpl implements IProjectService {
+public class ProjectServiceImplSetterInjection implements IProjectService {
 
     private IProjectRepository projectRepository;
 
-    // Note how @Qualifier works for Constructor Injection
-    public ProjectServiceImpl(@Qualifier("projectRepositoryImpl2") IProjectRepository projectRepository) {
+    @Autowired
+    @Qualifier("projectRepositoryImpl2")
+    public void setProjectRepository(IProjectRepository projectRepository) {
         this.projectRepository = projectRepository;
     }
 
@@ -29,3 +31,4 @@ public class ProjectServiceImpl implements IProjectService {
     }
 
 }
+
