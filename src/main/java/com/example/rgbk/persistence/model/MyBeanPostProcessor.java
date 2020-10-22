@@ -7,9 +7,9 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MyBeansPostProcessor implements BeanPostProcessor {
+public class MyBeanPostProcessor implements BeanPostProcessor {
 
-    private static final Logger LOG = LoggerFactory.getLogger(MyBeansPostProcessor.class);
+    private static final Logger LOG = LoggerFactory.getLogger(MyBeanPostProcessor.class);
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {

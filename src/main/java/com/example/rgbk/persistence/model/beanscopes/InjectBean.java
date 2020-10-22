@@ -1,4 +1,4 @@
-package com.example.rgbk.persistence.model;
+package com.example.rgbk.persistence.model.beanscopes;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

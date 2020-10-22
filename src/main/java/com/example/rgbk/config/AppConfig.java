@@ -1,8 +1,8 @@
 package com.example.rgbk.config;
 
-import com.example.rgbk.persistence.model.BeanA;
-import com.example.rgbk.persistence.model.BeanB;
-import com.example.rgbk.persistence.model.BeanC;
+import com.example.rgbk.persistence.model.lifecycle.BeanA;
+import com.example.rgbk.persistence.model.lifecycle.BeanB;
+import com.example.rgbk.persistence.model.lifecycle.BeanC;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
