@@ -1,5 +1,7 @@
-package com.example.rgbk.persistence.model.beanscopes;
+package com.example.rgbk.persistence.model;
 
+import com.example.rgbk.persistence.model.lifecycle.BeanB;
+import com.example.rgbk.persistence.model.lifecycle.BeanD;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
@@ -18,5 +20,10 @@ public class MyBeanFactory {
 //    public PrototypeBean prototypeBean(){
 //        return new PrototypeBean();
 //    }
+
+    @Bean
+    public BeanD beanD(){
+        return new BeanD();
+    }
 
 }
