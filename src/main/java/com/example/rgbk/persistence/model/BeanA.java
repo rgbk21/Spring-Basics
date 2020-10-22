@@ -9,6 +9,10 @@ public class BeanA {
 
     private static Logger log = LoggerFactory.getLogger(BeanA.class);
 
+    public BeanA() {
+        log.info("In BeanA - Constructor called.");
+    }
+
     @PostConstruct
     public void post() {
         log.info("In BeanA - @PostConstruct annotated method is called.");

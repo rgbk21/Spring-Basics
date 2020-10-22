@@ -11,6 +11,10 @@ public class BeanC {
 
     private static Logger log = LoggerFactory.getLogger(BeanC.class);
 
+    public BeanC() {
+        log.info("In BeanC - Constructor called.");
+    }
+
     @PreDestroy
     public void preDestroy() {
         log.info("In BeanC - @PreDestroy annotated method is called.");

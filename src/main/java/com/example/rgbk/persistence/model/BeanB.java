@@ -11,6 +11,10 @@ public class BeanB {
 
     private static Logger log = LoggerFactory.getLogger(BeanB.class);
 
+    public BeanB() {
+        log.info("In BeanB - Constructor called.");
+    }
+
     public void initialize() {
         log.info("In BeanB - Custom initializer is called.");
     }
