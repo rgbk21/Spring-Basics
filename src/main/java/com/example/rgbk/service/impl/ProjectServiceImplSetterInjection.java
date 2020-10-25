@@ -15,7 +15,7 @@ public class ProjectServiceImplSetterInjection implements IProjectService {
     private IProjectRepository projectRepository;
 
     @Autowired
-    @Qualifier("projectRepositoryImpl2")
+    @Qualifier("projectRepositoryImpl")
     public void setProjectRepository(IProjectRepository projectRepository) {
         this.projectRepository = projectRepository;
     }

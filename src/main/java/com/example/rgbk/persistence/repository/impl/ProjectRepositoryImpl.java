@@ -5,6 +5,7 @@ import com.example.rgbk.persistence.repository.IProjectRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
+@Profile("dev")
 public class ProjectRepositoryImpl implements IProjectRepository {
 
     private static final Logger LOG = LoggerFactory.getLogger(ProjectRepositoryImpl.class);

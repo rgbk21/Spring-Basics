@@ -2,6 +2,7 @@ package com.example.rgbk.persistence.repository.impl;
 
 import com.example.rgbk.persistence.model.Project;
 import com.example.rgbk.persistence.repository.IProjectRepository;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
+@Profile("prod")
 public class ProjectRepositoryImpl2 implements IProjectRepository {
 
     List<Project> projects = new ArrayList<>();
@@ -39,5 +41,4 @@ public class ProjectRepositoryImpl2 implements IProjectRepository {
 
         return project;
     }
-
 }

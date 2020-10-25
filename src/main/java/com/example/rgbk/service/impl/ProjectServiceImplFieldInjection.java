@@ -13,7 +13,7 @@ import java.util.Optional;
 public class ProjectServiceImplFieldInjection implements IProjectService {
 
     @Autowired
-    @Qualifier("projectRepositoryImpl2")
+    @Qualifier("projectRepositoryImpl")
     private IProjectRepository projectRepository;
 
     @Override

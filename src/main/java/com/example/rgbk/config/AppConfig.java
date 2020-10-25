@@ -47,5 +47,7 @@ public class AppConfig {
     @PostConstruct
     private void readPropertyValues(){
         LOG.info("project.prefix: {}", environment.getProperty("project.prefix"));
+        LOG.info("Active Profiles: {}", environment.getActiveProfiles());
+        LOG.info("Default Profiles: {}", environment.getDefaultProfiles());
     }
 }
