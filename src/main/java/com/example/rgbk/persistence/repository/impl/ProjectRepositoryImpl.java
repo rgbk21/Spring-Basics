@@ -46,8 +46,10 @@ public class ProjectRepositoryImpl implements IProjectRepository {
         updateInternalId(project);
 
         if (existingProject == null) {
+            LOG.debug("Creating a new project with id {}", project.getId());
             projects.add(project);
         } else {
+            LOG.debug("Project already exists. Updating project with id {}", project.getId());
             projects.remove(existingProject);
             Project newProject = new Project(project);
             projects.add(newProject);
