@@ -21,7 +21,7 @@ public class ProjectServiceImpl implements IProjectService, ApplicationContextAw
     private static final Logger log = LoggerFactory.getLogger(ProjectServiceImpl.class);
 
     // Note how @Qualifier works for Constructor Injection
-    public ProjectServiceImpl(@Qualifier("projectRepositoryImpl2") IProjectRepository projectRepository) {
+    public ProjectServiceImpl(@Qualifier("projectRepositoryImpl") IProjectRepository projectRepository) {
         this.projectRepository = projectRepository;
     }
 

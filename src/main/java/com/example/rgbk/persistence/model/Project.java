@@ -2,6 +2,7 @@ package com.example.rgbk.persistence.model;
 
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.Random;
 import java.util.StringJoiner;
 
 public class Project {
@@ -9,9 +10,21 @@ public class Project {
     private Long id;
     private String name;
     private LocalDate dateCreated;
+    private String internalId;
 
     public Project(Long id, String name, LocalDate dateCreated) {
+
+        if(Objects.isNull(id)) {
+            id = new Random().nextLong();
+        }
+
         this.id = id;
+        this.name = name;
+        this.dateCreated = dateCreated;
+    }
+
+    public Project(String name, LocalDate dateCreated) {
+        this.id = new Random().nextLong();
         this.name = name;
         this.dateCreated = dateCreated;
     }
@@ -44,6 +57,14 @@ public class Project {
         this.dateCreated = dateCreated;
     }
 
+    public String getInternalId() {
+        return internalId;
+    }
+
+    public void setInternalId(String internalId) {
+        this.internalId = internalId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -53,7 +74,8 @@ public class Project {
 
         if (!Objects.equals(id, project.id)) return false;
         if (!Objects.equals(name, project.name)) return false;
-        return Objects.equals(dateCreated, project.dateCreated);
+        if (!Objects.equals(dateCreated, project.dateCreated)) return false;
+        return Objects.equals(internalId, project.internalId);
     }
 
     @Override
@@ -61,15 +83,7 @@ public class Project {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (dateCreated != null ? dateCreated.hashCode() : 0);
+        result = 31 * result + (internalId != null ? internalId.hashCode() : 0);
         return result;
-    }
-
-    @Override
-    public String toString() {
-        return new StringJoiner(", ", Project.class.getSimpleName() + "[", "]")
-                .add("id=" + id)
-                .add("name='" + name + "'")
-                .add("dateCreated=" + dateCreated)
-                .toString();
     }
 }
