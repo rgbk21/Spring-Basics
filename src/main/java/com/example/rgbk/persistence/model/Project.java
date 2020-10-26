@@ -86,4 +86,14 @@ public class Project {
         result = 31 * result + (internalId != null ? internalId.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", Project.class.getSimpleName() + "[", "]")
+                .add("id=" + id)
+                .add("name='" + name + "'")
+                .add("dateCreated=" + dateCreated)
+                .add("internalId='" + internalId + "'")
+                .toString();
+    }
 }
