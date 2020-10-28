@@ -1,8 +1,8 @@
-package com.example.rgbk.service.impl;
+package com.example.rgbk.old_service.impl;
 
 import com.example.rgbk.persistence.model.Project;
-import com.example.rgbk.persistence.repository.IProjectRepository;
-import com.example.rgbk.service.IProjectService;
+import com.example.rgbk.persistence.old_repository.IProjectRepository;
+import com.example.rgbk.old_service.IProjectService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;

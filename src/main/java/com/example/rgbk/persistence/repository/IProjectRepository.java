@@ -1,14 +1,8 @@
 package com.example.rgbk.persistence.repository;
 
 import com.example.rgbk.persistence.model.Project;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Optional;
-
-public interface IProjectRepository {
-
-    Optional<Project> findById(Long id);
-
-    Project save(Project project);
-
+public interface IProjectRepository extends JpaRepository<Project, Long> {
 
 }

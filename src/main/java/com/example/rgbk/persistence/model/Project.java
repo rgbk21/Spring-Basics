@@ -1,16 +1,23 @@
 package com.example.rgbk.persistence.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Random;
 import java.util.StringJoiner;
 
+@Entity
 public class Project {
 
+    @Id
     private Long id;
     private String name;
     private LocalDate dateCreated;
     private String internalId;
+
+    public Project() {
+    }
 
     public Project(Long id, String name, LocalDate dateCreated) {
 

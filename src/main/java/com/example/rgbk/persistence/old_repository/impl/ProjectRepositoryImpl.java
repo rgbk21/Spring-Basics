@@ -1,7 +1,7 @@
-package com.example.rgbk.persistence.repository.impl;
+package com.example.rgbk.persistence.old_repository.impl;
 
 import com.example.rgbk.persistence.model.Project;
-import com.example.rgbk.persistence.repository.IProjectRepository;
+import com.example.rgbk.persistence.old_repository.IProjectRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;

@@ -1,7 +1,7 @@
 package com.example.rgbk;
 
 import com.example.rgbk.persistence.model.Project;
-import com.example.rgbk.service.IProjectService;
+import com.example.rgbk.old_service.IProjectService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

@@ -1,7 +1,7 @@
-package com.example.rgbk.persistence.repository.impl;
+package com.example.rgbk.persistence.old_repository.impl;
 
 import com.example.rgbk.persistence.model.Project;
-import com.example.rgbk.persistence.repository.IProjectRepository;
+import com.example.rgbk.persistence.old_repository.IProjectRepository;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 

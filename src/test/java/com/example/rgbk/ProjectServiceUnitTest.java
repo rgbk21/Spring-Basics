@@ -1,8 +1,8 @@
 package com.example.rgbk;
 
 import com.example.rgbk.persistence.model.Project;
-import com.example.rgbk.persistence.repository.IProjectRepository;
-import com.example.rgbk.service.impl.ProjectServiceImpl;
+import com.example.rgbk.persistence.old_repository.IProjectRepository;
+import com.example.rgbk.old_service.impl.ProjectServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
