@@ -1,7 +1,8 @@
 package com.example.rgbk;
 
 import com.example.rgbk.persistence.model.Project;
-import com.example.rgbk.old_service.IProjectService;
+import com.example.rgbk.service.IProjectService;
+import org.apache.commons.lang3.RandomUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,7 +20,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class ProjectServiceIntegrationTest2 {
 
     @Autowired
-    @Qualifier("projectServiceImpl")
     private IProjectService projectService;
 
     @Value("${project.prefix}")
@@ -40,7 +40,7 @@ public class ProjectServiceIntegrationTest2 {
 
     @Test
     public void whenSavingProject_thenOK() {
-        Project project = new Project("A New Project", LocalDate.now());
+        Project project = new Project(RandomUtils.nextLong(), "ProjectServiceIntegrationTest2-Project", LocalDate.now());
         Project savedProj = projectService.save(project);
         assertNotNull(savedProj);
     }

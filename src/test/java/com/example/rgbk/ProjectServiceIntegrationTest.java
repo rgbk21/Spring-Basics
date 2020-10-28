@@ -1,7 +1,8 @@
 package com.example.rgbk;
 
 import com.example.rgbk.persistence.model.Project;
-import com.example.rgbk.old_service.IProjectService;
+import com.example.rgbk.service.IProjectService;
+import org.apache.commons.lang3.RandomUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -10,6 +11,7 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -29,10 +31,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class ProjectServiceIntegrationTest {
 
     @Autowired
-    @Qualifier("projectServiceImpl")
     private IProjectService projectService;
 
-    // You can how we are reading value from 2 different property files
+    // You can see how we are reading value from 2 different property files
     // additional.info is defined in test.properties
     @Value("${additional.info}")
     private String additionalValue;
@@ -55,8 +56,20 @@ public class ProjectServiceIntegrationTest {
 
     @Test
     public void whenSavingProject_thenOK(){
-        Project project = new Project("A New Project", LocalDate.now());
+        Project project = new Project(RandomUtils.nextLong(),"ProjectServiceIntegrationTest - Project", LocalDate.now());
         Project savedProj = projectService.save(project);
         assertNotNull(savedProj);
+    }
+
+    @Test
+    public void whenSavingAndFindingProject_thenOK(){
+
+        long id = RandomUtils.nextLong();
+        Project createdProject = new Project(id,"Saving_And_Finding_Project", LocalDate.now());
+        projectService.save(createdProject);
+
+        Optional<Project> savedProj = projectService.findById(id);
+        Project foundProject = savedProj.get();
+        assertEquals(foundProject, createdProject);
     }
 }

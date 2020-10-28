@@ -7,4 +7,23 @@ CREATE TABLE project (
 );
 
 INSERT INTO project(id, name, date_created, internal_id)
-VALUES (2,'Spring Project 2', '07-JUN-02', 'internalId2');
+VALUES (3,'Spring Project 3', '07-JUN-02', 'internalId3');
+
+SELECT * FROM project;
+
+ALTER TABLE project 
+MODIFY id NUMBER(32,0);
+
+ALTER TABLE project
+MODIFY name VARCHAR2(255);
+
+DESC project;
+
+DELETE FROM project 
+WHERE date_created > '07-JUN-02';
+
+
+
+
+
+

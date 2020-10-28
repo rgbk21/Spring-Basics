@@ -1,8 +1,9 @@
 package com.example.rgbk;
 
 import com.example.rgbk.persistence.model.Project;
-import com.example.rgbk.persistence.old_repository.IProjectRepository;
-import com.example.rgbk.old_service.impl.ProjectServiceImpl;
+import com.example.rgbk.persistence.repository.IProjectRepository;
+import com.example.rgbk.service.impl.ProjectServiceImpl;
+import org.apache.commons.lang3.RandomUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -30,7 +31,7 @@ public class ProjectServiceUnitTest {
     @Test
     public void whenSavingProject_thenOK() {
 
-        Project project = new Project("name", LocalDate.now());
+        Project project = new Project(RandomUtils.nextLong(),"Mock-ProjectServiceUnitTest", LocalDate.now());
         when(projectRepository.save(project)).thenReturn(project);
 
         Project savedProject = projectService.save(project);

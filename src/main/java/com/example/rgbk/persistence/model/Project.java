@@ -1,10 +1,11 @@
 package com.example.rgbk.persistence.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import org.apache.commons.lang3.RandomUtils;
+import org.springframework.beans.factory.annotation.Value;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
-import java.util.Random;
 import java.util.StringJoiner;
 
 @Entity
@@ -22,7 +23,7 @@ public class Project {
     public Project(Long id, String name, LocalDate dateCreated) {
 
         if(Objects.isNull(id)) {
-            id = new Random().nextLong();
+            id = RandomUtils.nextLong();
         }
 
         this.id = id;
@@ -30,11 +31,6 @@ public class Project {
         this.dateCreated = dateCreated;
     }
 
-    public Project(String name, LocalDate dateCreated) {
-        this.id = new Random().nextLong();
-        this.name = name;
-        this.dateCreated = dateCreated;
-    }
 
     public Project(Project project) {
         this(project.getId(), project.getName(), project.getDateCreated());
