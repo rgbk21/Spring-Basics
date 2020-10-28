@@ -15,6 +15,11 @@ public class Project {
     private Long id;
     private String name;
     private LocalDate dateCreated;
+
+    @Enumerated(EnumType.STRING)
+    @Column(length = 16)
+    private ProjectStatus projectStatus;
+
     private String internalId;
 
     public Project() {
@@ -29,6 +34,7 @@ public class Project {
         this.id = id;
         this.name = name;
         this.dateCreated = dateCreated;
+        this.projectStatus = ProjectStatus.STARTED;
     }
 
 
@@ -68,6 +74,14 @@ public class Project {
         this.internalId = internalId;
     }
 
+    public ProjectStatus getProjectStatus() {
+        return projectStatus;
+    }
+
+    public void setProjectStatus(ProjectStatus projectStatus) {
+        this.projectStatus = projectStatus;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -78,6 +92,7 @@ public class Project {
         if (!Objects.equals(id, project.id)) return false;
         if (!Objects.equals(name, project.name)) return false;
         if (!Objects.equals(dateCreated, project.dateCreated)) return false;
+        if (projectStatus != project.projectStatus) return false;
         return Objects.equals(internalId, project.internalId);
     }
 
@@ -86,6 +101,7 @@ public class Project {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (dateCreated != null ? dateCreated.hashCode() : 0);
+        result = 31 * result + (projectStatus != null ? projectStatus.hashCode() : 0);
         result = 31 * result + (internalId != null ? internalId.hashCode() : 0);
         return result;
     }
@@ -96,6 +112,7 @@ public class Project {
                 .add("id=" + id)
                 .add("name='" + name + "'")
                 .add("dateCreated=" + dateCreated)
+                .add("projectStatus=" + projectStatus)
                 .add("internalId='" + internalId + "'")
                 .toString();
     }
