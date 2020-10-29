@@ -11,10 +11,12 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.assertj.core.api.Assertions.assertThat;
 
 // This test does not work for some reason. Dunno why
 // @SpringBootTest annotation works with the same test
@@ -62,7 +64,7 @@ public class ProjectServiceIntegrationTest {
     }
 
     @Test
-    public void whenSavingAndFindingProject_thenOK(){
+    public void whenSavingAndFindingProjectById_thenOK(){
 
         long id = RandomUtils.nextLong();
         Project createdProject = new Project(id,"Saving_And_Finding_Project", LocalDate.now());
@@ -71,5 +73,35 @@ public class ProjectServiceIntegrationTest {
         Optional<Project> savedProj = projectService.findById(id);
         Project foundProject = savedProj.get();
         assertEquals(foundProject, createdProject);
+    }
+
+
+    @Test
+    public void whenSavingAndFindingProjectByName_thenOK(){
+
+        String projectName = "Saving_And_Finding_Project_By_Name";
+        Project createdProject = new Project(RandomUtils.nextLong(), projectName, LocalDate.now());
+        projectService.save(createdProject);
+
+        List<Project> projectList = projectService.findByName(projectName);
+        Project foundProject = projectList.get(0);
+        assertEquals(foundProject, createdProject);
+    }
+
+    @Test
+    public void whenSavingAndFindingProjectByDateCreatedBetween_thenOK(){
+
+        Project oldProject = new Project(RandomUtils.nextLong(), "Old Project", LocalDate.now().minusYears(1));
+        Project newProject1 = new Project(RandomUtils.nextLong(), "New Project 1", LocalDate.now());
+        Project newProject2 = new Project(RandomUtils.nextLong(), "New Project 2", LocalDate.now());
+
+        projectService.save(oldProject);
+        projectService.save(newProject1);
+        projectService.save(newProject2);
+
+        List<Project> foundProjects = projectService.findByDateCreatedBetween(LocalDate.now().minusDays(1), LocalDate.now().plusDays(1));
+
+        assertThat(foundProjects).contains(newProject1, newProject2).doesNotContain(oldProject);
+
     }
 }

@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.Transient;
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -27,6 +29,16 @@ public class ProjectServiceImpl implements IProjectService {
     @Override
     public Optional<Project> findById(long id) {
         return projectRepository.findById(id);
+    }
+
+    @Override
+    public List<Project> findByName(String name) {
+        return projectRepository.findByName(name);
+    }
+
+    @Override
+    public List<Project> findByDateCreatedBetween(LocalDate startDate, LocalDate endDate) {
+        return projectRepository.findByDateCreatedBetween(startDate, endDate);
     }
 
     @Override
