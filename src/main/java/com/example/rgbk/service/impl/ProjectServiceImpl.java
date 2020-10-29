@@ -47,6 +47,14 @@ public class ProjectServiceImpl implements IProjectService {
         return projectRepository.save(project);
     }
 
+    @Override
+    public List<Project> saveAll(List<Project> projectList) {
+        for (Project project : projectList) {
+            updateInternalId(project);
+        }
+        return projectRepository.saveAll(projectList);
+    }
+
     // Recall we were trying to do this (inject values from the property file)
     // within the @Entity class but it was not working
     // because the lifecycle of @Entity is not managed by Spring

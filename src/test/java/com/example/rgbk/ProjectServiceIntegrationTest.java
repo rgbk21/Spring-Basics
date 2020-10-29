@@ -11,6 +11,7 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -101,6 +102,19 @@ public class ProjectServiceIntegrationTest {
         List<Project> foundProjects = projectService.findByDateCreatedBetween(LocalDate.now().minusDays(1), LocalDate.now().plusDays(1));
 
         assertThat(foundProjects).contains(newProject1, newProject2).doesNotContain(oldProject);
+
+    }
+
+    @Test
+    public void testBatchingWhenProjectsAreSaved(){
+
+        List<Project> projectList = new ArrayList<>();
+        for (int i = 0; i < 13; i++) {
+            Project project = new Project(RandomUtils.nextLong(), "Batch Project " + i, LocalDate.now());
+            projectList.add(project);
+        }
+
+        projectService.saveAll(projectList);
 
     }
 }

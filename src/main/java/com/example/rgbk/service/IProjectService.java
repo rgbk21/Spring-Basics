@@ -12,5 +12,6 @@ public interface IProjectService {
     List<Project> findByName(String name);
     List<Project> findByDateCreatedBetween(LocalDate startDate, LocalDate endDate);
     Project save(Project project);
+    List<Project> saveAll(List<Project> project);
 
 }
