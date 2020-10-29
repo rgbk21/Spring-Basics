@@ -29,7 +29,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 // and that configuration will scan the entire package structure
 @SpringJUnitConfig(value = TestConfig.class)
 //@ActiveProfiles("dev") // Note without specifying the profile, we are getting error during autowiring the bean (actually, not anymore)
-@TestPropertySource(locations = {"classpath:application-test.properties", "classpath:test.properties"})
+@TestPropertySource(locations = {"classpath:application-test.properties", "classpath:test.properties", "classpath:spy.properties"})
 public class ProjectServiceIntegrationTest {
 
     @Autowired
@@ -84,8 +84,7 @@ public class ProjectServiceIntegrationTest {
         projectService.save(createdProject);
 
         List<Project> projectList = projectService.findByName(projectName);
-        Project foundProject = projectList.get(0);
-        assertEquals(foundProject, createdProject);
+        assertThat(projectList).contains(createdProject);
     }
 
     @Test
