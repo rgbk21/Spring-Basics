@@ -6,6 +6,17 @@ CREATE TABLE project (
     CONSTRAINT PK_ID PRIMARY KEY (id)
 );
 
+CREATE TABLE task (
+    id NUMBER(8,0) NOT NULL,
+    name VARCHAR2(20) NOT NULL,
+    description VARCHAR2(255),
+    date_created DATE NOT NULL,
+    status VARCHAR2(16) NOT NULL,
+    project_id NUMBER(8,0) NOT NULL,
+    CONSTRAINT PK_ID PRIMARY KEY (id),
+    FOREIGN KEY(project_id) REFERENCES project(id)
+);
+
 INSERT INTO project(id, name, date_created, internal_id)
 VALUES (3,'Spring Project 3', '07-JUN-02', 'internalId3');
 

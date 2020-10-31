@@ -1,4 +1,4 @@
-package com.example.rgbk.persistence.model;
+package com.example.rgbk.persistence.model.BeanFactory;
 
 import com.example.rgbk.persistence.model.lifecycle.BeanB;
 import com.example.rgbk.persistence.model.lifecycle.BeanD;

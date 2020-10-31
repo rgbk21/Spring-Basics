@@ -1,4 +1,4 @@
-package com.example.rgbk.persistence.model;
+package com.example.rgbk.persistence.model.BeanFactory;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

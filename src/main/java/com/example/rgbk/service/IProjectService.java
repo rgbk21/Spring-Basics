@@ -13,5 +13,6 @@ public interface IProjectService {
     List<Project> findByDateCreatedBetween(LocalDate startDate, LocalDate endDate);
     Project save(Project project);
     List<Project> saveAll(List<Project> project);
+    List<Project> findByNameMatches_New();
 
 }

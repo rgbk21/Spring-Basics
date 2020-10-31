@@ -1,6 +1,7 @@
 package com.example.rgbk;
 
 import com.example.rgbk.persistence.model.Project;
+import com.example.rgbk.persistence.model.Task;
 import com.example.rgbk.service.IProjectService;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.jupiter.api.Test;
@@ -115,6 +116,63 @@ public class ProjectServiceIntegrationTest {
         }
 
         projectService.saveAll(projectList);
+    }
 
+    @Test
+    public void whenFindingProjectNamesContainingName_New_ThenOk(){
+
+        Project oldProject = new Project(RandomUtils.nextLong(), "Old Project", LocalDate.now().minusYears(1));
+        Project newProject1 = new Project(RandomUtils.nextLong(), "New Project 1", LocalDate.now());
+        Project newProject2 = new Project(RandomUtils.nextLong(), "New Project 2", LocalDate.now());
+
+        projectService.save(oldProject);
+        projectService.save(newProject1);
+        projectService.save(newProject2);
+
+        List<Project> foundProjects = projectService.findByNameMatches_New();
+
+        assertThat(foundProjects).contains(newProject1, newProject2).doesNotContain(oldProject);
+    }
+
+    @Test
+    public void whenSavingAndFindingProjectAndTaskById_thenOK(){
+
+        long projectId = RandomUtils.nextLong();
+        long taskId1 = RandomUtils.nextLong();
+        long taskId2 = RandomUtils.nextLong();
+
+        Project createdProject = new Project(projectId,"SavingAndFinding_ProjectAndTask_ById", LocalDate.now());
+        Task task1 = new Task(taskId1, "SavingAndFinding_ProjectAndTask_ById_Task1", LocalDate.now());
+        Task task2 = new Task(taskId2, "SavingAndFinding_ProjectAndTask_ById_Task2", LocalDate.now());
+
+        createdProject.addTask(task1);
+        createdProject.addTask(task2);
+
+        projectService.save(createdProject);
+
+        Optional<Project> savedProj = projectService.findById(projectId);
+        Project foundProject = savedProj.get();
+        assertEquals(foundProject, createdProject);
+    }
+
+    @Test
+    public void whenSavingAndDeletingAndThenFindingProjectAndTaskById_thenOK(){
+
+        long projectId = RandomUtils.nextLong();
+        long taskId1 = RandomUtils.nextLong();
+        long taskId2 = RandomUtils.nextLong();
+
+        Project createdProject = new Project(projectId,"SavingAndDeletingAndThenFindingProjectAndTaskById", LocalDate.now());
+        Task task1 = new Task(taskId1, "SavingAndDeletingAndThenFindingProjectAndTaskById_Task1", LocalDate.now());
+        Task task2 = new Task(taskId2, "SavingAndDeletingAndThenFindingProjectAndTaskById_Task2", LocalDate.now());
+
+        createdProject.addTask(task1);
+        createdProject.addTask(task2);
+
+        projectService.save(createdProject);
+
+        Optional<Project> savedProj = projectService.findById(projectId);
+        Project foundProject = savedProj.get();
+        assertEquals(foundProject, createdProject);
     }
 }

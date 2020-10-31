@@ -42,6 +42,11 @@ public class ProjectServiceImpl implements IProjectService {
     }
 
     @Override
+    public List<Project> findByNameMatches_New() {
+        return projectRepository.findByNameMatches_New();
+    }
+
+    @Override
     public Project save(Project project) {
         updateInternalId(project);
         return projectRepository.save(project);
@@ -54,6 +59,9 @@ public class ProjectServiceImpl implements IProjectService {
         }
         return projectRepository.saveAll(projectList);
     }
+
+
+
 
     // Recall we were trying to do this (inject values from the property file)
     // within the @Entity class but it was not working
