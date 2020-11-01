@@ -7,11 +7,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.Transient;
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional()
 public class ProjectServiceImpl implements IProjectService {
 
     private IProjectRepository projectRepository;
@@ -53,6 +55,13 @@ public class ProjectServiceImpl implements IProjectService {
     }
 
     @Override
+    public Project saveAndFlush(Project project) {
+        updateInternalId(project);
+        return projectRepository.saveAndFlush(project);
+    }
+
+
+    @Override
     public List<Project> saveAll(List<Project> projectList) {
         for (Project project : projectList) {
             updateInternalId(project);
@@ -60,8 +69,15 @@ public class ProjectServiceImpl implements IProjectService {
         return projectRepository.saveAll(projectList);
     }
 
+    @Override
+    public long deleteByName(String name) {
+        return projectRepository.deleteByName(name);
+    }
 
-
+    @Override
+    public void deleteById(long id) {
+        projectRepository.deleteById(id);
+    }
 
     // Recall we were trying to do this (inject values from the property file)
     // within the @Entity class but it was not working

@@ -10,6 +10,10 @@ public interface ITaskService {
 
     Optional<Task> findById(long id);
     List<Task> findByName(String name);
+
     Task save(Task task);
+
+    long deleteByName(String name);
+    void deleteById(long id);
 
 }

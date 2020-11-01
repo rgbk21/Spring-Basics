@@ -5,10 +5,8 @@ import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.StringJoiner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Entity
 public class Project {
@@ -25,7 +23,7 @@ public class Project {
     private String internalId;
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Task> tasks = new ArrayList<>();
+    private Set<Task> tasks;
 
     public Project() {
     }
@@ -40,11 +38,13 @@ public class Project {
         this.name = name;
         this.dateCreated = dateCreated;
         this.projectStatus = ProjectStatus.STARTED;
+        this.tasks = new HashSet<>();
     }
 
 
     public Project(Project project) {
         this(project.getId(), project.getName(), project.getDateCreated());
+        this.tasks = new HashSet<>(project.tasks);
     }
 
     // Mapping to keep both parent-child sides in-sync
@@ -64,13 +64,12 @@ public class Project {
         return this;
     }
 
-    public List<Task> getTasks() {
+    public Set<Task> getTasks() {
         return this.tasks;
     }
 
-    private Project setTasks(List<Task> tasks) {
+    private void setTasks(Set<Task> tasks) {
         this.tasks = tasks;
-        return this;
     }
 
 

@@ -6,10 +6,12 @@ import com.example.rgbk.service.ITaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional()
 public class TaskServiceImpl implements ITaskService {
 
     @Autowired
@@ -28,5 +30,15 @@ public class TaskServiceImpl implements ITaskService {
     @Override
     public Task save(Task task) {
         return taskRepository.save(task);
+    }
+
+    @Override
+    public long deleteByName(String name) {
+        return taskRepository.deleteByName(name);
+    }
+
+    @Override
+    public void deleteById(long id) {
+        taskRepository.deleteById(id);
     }
 }

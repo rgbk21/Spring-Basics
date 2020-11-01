@@ -8,4 +8,5 @@ import java.util.List;
 public interface ITaskRepository extends JpaRepository<Task, Long> {
 
     List<Task> findByName(String name);
+    long deleteByName(String name);
 }

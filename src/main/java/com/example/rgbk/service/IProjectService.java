@@ -11,8 +11,13 @@ public interface IProjectService {
     Optional<Project> findById(long id);
     List<Project> findByName(String name);
     List<Project> findByDateCreatedBetween(LocalDate startDate, LocalDate endDate);
-    Project save(Project project);
-    List<Project> saveAll(List<Project> project);
     List<Project> findByNameMatches_New();
+
+    Project save(Project project);
+    Project saveAndFlush(Project project);
+    List<Project> saveAll(List<Project> project);
+
+    long deleteByName(String name);
+    void deleteById(long id);
 
 }

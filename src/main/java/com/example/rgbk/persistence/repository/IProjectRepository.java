@@ -20,5 +20,7 @@ public interface IProjectRepository extends JpaRepository<Project, Long> {
     )
     List<Project> findByNameMatches_New();
 
+    long deleteByName(String name);
+
 
 }

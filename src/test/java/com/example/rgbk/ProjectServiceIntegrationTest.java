@@ -6,7 +6,6 @@ import com.example.rgbk.service.IProjectService;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
@@ -16,9 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.Matcher.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 // This test does not work for some reason. Dunno why
 // @SpringBootTest annotation works with the same test
@@ -158,21 +159,47 @@ public class ProjectServiceIntegrationTest {
     @Test
     public void whenSavingAndDeletingAndThenFindingProjectAndTaskById_thenOK(){
 
-        long projectId = RandomUtils.nextLong();
-        long taskId1 = RandomUtils.nextLong();
-        long taskId2 = RandomUtils.nextLong();
+        long hardCodedProjectId = 5178556999178760192L;
+//        long projectId = RandomUtils.nextLong();
+//        long taskId1 = RandomUtils.nextLong();
+//        long taskId2 = RandomUtils.nextLong();
+//
+//        Project createdProject = new Project(projectId,"SavingAndDeletingAndThenFindingProjectAndTaskById", LocalDate.now());
+//        Task task1 = new Task(taskId1, "SavingAndDeletingAndThenFindingProjectAndTaskById_Task1", LocalDate.now());
+//        Task task2 = new Task(taskId2, "SavingAndDeletingAndThenFindingProjectAndTaskById_Task2", LocalDate.now());
+//
+//        createdProject.addTask(task1);
+//        createdProject.addTask(task2);
+//
+//        projectService.save(createdProject);
 
-        Project createdProject = new Project(projectId,"SavingAndDeletingAndThenFindingProjectAndTaskById", LocalDate.now());
-        Task task1 = new Task(taskId1, "SavingAndDeletingAndThenFindingProjectAndTaskById_Task1", LocalDate.now());
-        Task task2 = new Task(taskId2, "SavingAndDeletingAndThenFindingProjectAndTaskById_Task2", LocalDate.now());
+        projectService.deleteById(hardCodedProjectId);
+
+        Optional<Project> savedProj = projectService.findById(hardCodedProjectId);
+        Project foundProject = savedProj.get();
+        org.hamcrest.MatcherAssert.assertThat(foundProject, is(nullValue()));
+    }
+
+    @Test
+    public void whenSavingAndDeletingAndThenFindingProjectAndTaskByName_thenOK(){
+
+//        long hardCodedProjectId = 5178556999178760192L;
+        String projectName = "SavingAndDeletingAndThenFindingProjectAndTask_ByName";
+        String taskName1 = "SavingAndDeletingAndThenFindingProjectAndTask_ByName_Task1";
+        String taskName2 = "SavingAndDeletingAndThenFindingProjectAndTask_ByName_Task2";
+
+        Project createdProject = new Project(RandomUtils.nextLong(), projectName, LocalDate.now());
+        Task task1 = new Task(RandomUtils.nextLong(), taskName1, LocalDate.now());
+        Task task2 = new Task(RandomUtils.nextLong(), taskName2, LocalDate.now());
 
         createdProject.addTask(task1);
         createdProject.addTask(task2);
 
         projectService.save(createdProject);
 
-        Optional<Project> savedProj = projectService.findById(projectId);
-        Project foundProject = savedProj.get();
-        assertEquals(foundProject, createdProject);
+        projectService.deleteByName(projectName);
+
+        List<Project> savedProj = projectService.findByName(projectName);
+        assertThat(savedProj).doesNotContain(createdProject);
     }
 }
