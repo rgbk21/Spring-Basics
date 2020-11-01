@@ -4,6 +4,7 @@ import com.example.rgbk.persistence.model.Project;
 import com.example.rgbk.persistence.model.Task;
 import com.example.rgbk.service.IProjectService;
 import org.apache.commons.lang3.RandomUtils;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -159,31 +160,30 @@ public class ProjectServiceIntegrationTest {
     @Test
     public void whenSavingAndDeletingAndThenFindingProjectAndTaskById_thenOK(){
 
-        long hardCodedProjectId = 5178556999178760192L;
-//        long projectId = RandomUtils.nextLong();
-//        long taskId1 = RandomUtils.nextLong();
-//        long taskId2 = RandomUtils.nextLong();
-//
-//        Project createdProject = new Project(projectId,"SavingAndDeletingAndThenFindingProjectAndTaskById", LocalDate.now());
-//        Task task1 = new Task(taskId1, "SavingAndDeletingAndThenFindingProjectAndTaskById_Task1", LocalDate.now());
-//        Task task2 = new Task(taskId2, "SavingAndDeletingAndThenFindingProjectAndTaskById_Task2", LocalDate.now());
-//
-//        createdProject.addTask(task1);
-//        createdProject.addTask(task2);
-//
-//        projectService.save(createdProject);
+//        long hardCodedProjectId = 5178556999178760192L;
+        long projectId = RandomUtils.nextLong();
+        long taskId1 = RandomUtils.nextLong();
+        long taskId2 = RandomUtils.nextLong();
 
-        projectService.deleteById(hardCodedProjectId);
+        Project createdProject = new Project(projectId,"SavingAndDeletingAndThenFindingProjectAndTaskById", LocalDate.now());
+        Task task1 = new Task(taskId1, "SavingAndDeletingAndThenFindingProjectAndTaskById_Task1", LocalDate.now());
+        Task task2 = new Task(taskId2, "SavingAndDeletingAndThenFindingProjectAndTaskById_Task2", LocalDate.now());
 
-        Optional<Project> savedProj = projectService.findById(hardCodedProjectId);
-        Project foundProject = savedProj.get();
+        createdProject.addTask(task1);
+        createdProject.addTask(task2);
+
+        projectService.save(createdProject);
+
+        projectService.deleteById(projectId);
+
+        Optional<Project> savedProj = projectService.findById(projectId);
+        Project foundProject = savedProj.orElse(null);
         org.hamcrest.MatcherAssert.assertThat(foundProject, is(nullValue()));
     }
 
     @Test
     public void whenSavingAndDeletingAndThenFindingProjectAndTaskByName_thenOK(){
 
-//        long hardCodedProjectId = 5178556999178760192L;
         String projectName = "SavingAndDeletingAndThenFindingProjectAndTask_ByName";
         String taskName1 = "SavingAndDeletingAndThenFindingProjectAndTask_ByName_Task1";
         String taskName2 = "SavingAndDeletingAndThenFindingProjectAndTask_ByName_Task2";
